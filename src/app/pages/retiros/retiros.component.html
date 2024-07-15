@@ -1,0 +1,37 @@
+
+<div class="w-full flex items-center justify-center pt-10 px-10 space-x-4">
+    <img src="assets/color_logo_genuine.png" alt="Genuine Logo" class="w-1/3"/>
+    <div class="w-2/3">
+        <p class="text-lg">Inversion en: Propiedad</p>
+        <p class="text-lg">Rendimiento:</p>
+        <p class="returns-green text-lg">$00.00</p>
+    </div>
+</div>
+<form [formGroup]="data"  class="w-full flex justify-center mb-2">
+    <div class="w-4/5">
+        <magic-input formControlName="cuenta" kind="select" label="Cuenta" id="cuenta" [options]="cuentas"></magic-input>
+    </div>
+</form>
+
+<div class="w-full flex justify-center">
+    <div class="border border-black shadow-md w-4/5 rounded">
+        <div class="w-full genuine-blue text-white text-center" >Retiros</div>
+        <div class="text-center">$1,000</div>
+    </div>
+</div>
+
+<div class="flex justify-center m-4">
+    <p class="text-xl">Mis Retiros</p>
+</div>
+
+<div class="w-full flex justify-center">
+    <div class="w-4/5 flex flex-col space-y-2 px-2 pt-2 h-[40vh] border rounded border-black shadow-md overflow-scroll">
+        @for(retiro of retiros; track retiros){
+            <div class="genuine-blue text-white py-4 px-2 rounded flex justify-between">
+                <p>{{retiro.fecha}}</p>
+                <p>${{retiro.monto}}</p>
+            </div>
+        }
+        
+    </div>
+</div>

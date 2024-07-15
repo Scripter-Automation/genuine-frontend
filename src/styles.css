@@ -1,1 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.container-gray{
+    background-color: #EFEFEF;
+}
+
+.child-gray{
+    background-color: #ACACAC;
+}
+
+.genuine-blue{
+    background-color: #0C0E3F;
+}
+
+.returns-green{
+    color: #009706;
+}
+
+.returns-red{
+    color: #E10707;
+}
+

@@ -1,0 +1,22 @@
+<toaster></toaster>
+<div class="flex flex-col items-center w-full">
+    <img src="assets/color_logo_genuine.png" alt="Genuine Logo" class="w-2/5"/>
+
+    <form [formGroup]="formData" (submit)="handle_sumbit"  class="flex justify-center mt-10 w-full">
+        <div class="flex flex-col space-y-4 w-4/5">
+            @if(currentType==FormTypes.AgregarCuenta){
+                <magic-input formControlName="numero_cuenta" [required]="true" label="Numero de Cuenta" kind="number" id="numCuenta" placeholder="Ingresa el monto a transferir"></magic-input>
+                <magic-input formControlName="banco" [required]="true" label="Banco" id="Banco" kind="select" [options]="Bancos" ></magic-input>
+                <button type="submit" class="w-full rounded text-white p-2 text-xl genuine-blue my-1">Agregar Cuenta</button>
+            }@else if (currentType==FormTypes.EditarCuenta){
+                <magic-input formControlName="numero_cuenta" [required]="true" label="Numero de Cuenta" kind="number" id="numCuenta" placeholder="Ingresa el monto a transferir"></magic-input>
+                <magic-input formControlName="banco" [required]="true" label="Banco" id="Banco" kind="select" [options]="Bancos" ></magic-input>
+                <button type="submit" class="w-full rounded text-white p-2 text-xl genuine-blue my-1">Editar Cuenta</button>
+            }
+            @else if (currentType==FormTypes.CambiarContrasena){
+                <magic-input formControlName="new_password" [required]="true" label="Nueva Contraseña" id="newpass" kind="text" [options]="Bancos" placeholder="Ingrese su nueva contraseña"></magic-input>
+                <button type="submit" class="w-full rounded text-white p-2 text-xl genuine-blue my-1">Cambiar Contraseña</button>
+            }
+        </div>
+    </form>
+</div> 

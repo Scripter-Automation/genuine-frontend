@@ -1,0 +1,15 @@
+@if(kind!="select"){
+    <div class="flex flex-col w-full">
+        <label [htmlFor]="id">{{label}}</label>
+        <input [formControl]="control" [required]="required" class="w-full border-black border rounded-sm p-2" [type]="kind" [name]="id" [id]="id" [placeholder]="placeholder"/>
+    </div>
+}@else{
+    <div class=" flex flex-col w-full">
+        <label [htmlFor]="id">{{label}}</label>
+        <select [formControl]="control" [required]="required" class="w-full border-black border rounded-sm p-2" [name]="id" [id]="id">
+            @for(option of options; track options){
+                <option [id]="id" [value]="option">{{option}}</option>
+            }
+        </select>
+    </div>
+}

@@ -1,0 +1,13 @@
+<user-data-header></user-data-header>
+
+<div class="flex justify-center m-4">
+    <p class="text-xl">Mis contratos</p>
+</div>
+<div class="flex flex-col items-center space-y-4 pb-20">
+    @for (card of cards; track cards){
+        <div class="container-gray flex justify-between w-4/5 p-4 rounded-[1.7rem] shadow-md items-center">
+            <h3 class="text-2xl">Contrato</h3>
+            <button (click)="signContract()" class="p-1 px-8 shadow-sm text-white genuine-blue rounded">Ver Más</button>
+        </div>
+    }
+</div>
