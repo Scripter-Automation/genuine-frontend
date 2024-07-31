@@ -11,7 +11,6 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
       const firebaseService = inject(FirebaseService);
       firebaseService.stateChange();
       const router = inject(Router);
-      console.log("Have user",firebaseService.haveUser())
       if(firebaseService.haveUser()){
         return true;
       }else{

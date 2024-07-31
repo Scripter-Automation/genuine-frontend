@@ -18,8 +18,9 @@ export class BackendService {
         "Authorization":`Bearer ${myToken}`
       }
     })
-
-    this.storage_service.store("Profile",await response.json() as Item)
+    let res = await response.json()
+    console.log(res)
+    this.storage_service.store("Profile",res as Item)
 
   }
 }

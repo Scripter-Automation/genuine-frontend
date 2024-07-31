@@ -8,6 +8,7 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { FormHandlerComponent } from './pages/form-handler/form-handler.component';
 import { RetirosComponent } from './pages/retiros/retiros.component';
 import { authGuard, sessionGuard } from './auth.guard';
+import { SigningComponent } from './pages/signing/signing.component';
 
 export const routes: Routes = [
     {path:'', redirectTo:"/IniciarSession",pathMatch:'full'},
@@ -17,7 +18,8 @@ export const routes: Routes = [
     {path:"Contratos", component:ContratosComponent, canActivate:[authGuard]},
     {path:"Perfil", component:PerfilComponent, canActivate:[authGuard]},
     {path:"Formulario",component:FormHandlerComponent, canActivate:[authGuard]},
-    {path:"Retiros",component:RetirosComponent, canActivate:[authGuard]}
+    {path:"Retiros",component:RetirosComponent, canActivate:[authGuard]},
+    {path:"Signing", component:SigningComponent, canActivate:[authGuard]}
 ];
 
 @NgModule({

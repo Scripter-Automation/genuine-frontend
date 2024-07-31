@@ -14,9 +14,14 @@ export const environment = {
     docusignConfig:{
       integrationKey:"a3a58b3c-bfc2-4271-9c8d-8f8c69e094d3",
       authSecret:"6029d7a0-8039-404e-a156-90389bb694cb",
-      redirectURI:"http://localhost:4200/Contratos"
+      redirectURI:"http://localhost:4200/Contratos",
+      accountID: "df38f9c3-9f34-4ee0-b07b-246c7d5215c3"
     },
     Docusing_Auth_URL:"",
+    Docusing_base_path:dev_base_url,
+    docusignTemplates:{
+      test:"6c385063-32bb-4c2b-aa79-642e78b1f594"
+    },
     Back_end:{
       url:"http://localhost:3000/",
       paths:{

@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { Firestore, getFirestore } from 'firebase/firestore';
-import { Auth, getAuth, signInWithEmailAndPassword, updatePassword, UserCredential } from 'firebase/auth';
+import { Auth, getAuth, signOut, signInWithEmailAndPassword, updatePassword } from 'firebase/auth';
 import { Item, StorageService, TimeFrame } from './storage.service';
 import { ExpiringCredential, QueryParams } from '../types/global';
 import { collection, doc, DocumentData, query,getDocs, where, updateDoc, addDoc, deleteDoc } from 'firebase/firestore';
-import { error } from 'console';
-import { HttpClient } from '@angular/common/http';
 import { BackendService } from './backend.service';
 import { Router } from '@angular/router';
 import type { User } from 'firebase/auth';
@@ -33,7 +31,7 @@ export class FirebaseService {
   private app: FirebaseApp;
   protected db: Firestore;
   private auth: Auth;
-  private user?: Item;
+  private user?:User|Item;
 
 
   constructor(public storage_service: StorageService,private backend_service:BackendService, private router:Router) {
@@ -41,16 +39,22 @@ export class FirebaseService {
     this.db = getFirestore(this.app);
     this.auth = getAuth(this.app);
     this.user = this.storage_service.get("Profile") as Item
+    console.log(this.user)
+    this.stateChange();
+
   }
 
-  public stateChange(){
-    this.auth.onAuthStateChanged((user) => {
-      if(user instanceof User){
+  public async stateChange() {
+    await new Promise((resolve) => {
+        this.auth.onAuthStateChanged((user) => {
+            this.user = user as User;
+            console.log(this.user)
+            resolve(null);
+        });
+    });
 
-        this.user=user
-      }
-    })
-  }
+}
+
  
 
   /**
@@ -58,7 +62,9 @@ export class FirebaseService {
   */
   public async Login(email: string, password: string): Promise<void> {
     const userCredential =(await signInWithEmailAndPassword(this.auth, email, password)) as ExpiringCredential;
-    await this.backend_service.create_session(await userCredential.user.getIdToken());
+    const response = await this.backend_service.create_session(await userCredential.user.getIdToken());
+    this.stateChange()
+
   }
 
   public get_user_uid(){
@@ -70,20 +76,15 @@ export class FirebaseService {
   }
 
 
-  //Falta agregar que revise si la sesion sigue activa
-  public haveUser():boolean{
-    console.log("user",this.user)
-    if(this.user !== null && this.user!==undefined){
-      return true;
-    }else{
-      return false;
-    }
+  public haveUser(): boolean {
+    return (this.user !== null && this.user!==undefined)
   }
 
   
   public logout(){
-    //Este codigo esta incompleto, se debe eleminar la session desde el servidor
     this.storage_service.delete("Profile")
+    signOut(this.auth)
+    this.user=undefined;
     this.router.navigate(["/"])
 
   }
@@ -124,7 +125,7 @@ export class FirebaseService {
    * @param uid The unique Id required by the wildcard
    * @param data The data to replace the original data
    */
-  public async uptadte(collection_name:string,uid:string,data:DocumentData){
+  public async update(collection_name:string,uid:string,data:DocumentData){
     if(this.haveUser()){
       try{
         const my_collection = collection(this.db,collection_name);

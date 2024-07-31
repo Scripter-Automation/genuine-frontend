@@ -20,7 +20,7 @@ export class OportunidadesComponent implements OnInit {
   constructor(private storage_service:StorageService,private firebase_service:FirebaseService){}
 
   ngOnInit(): void {
-    const user_profile = (this.storage_service.get("user_profile") as unknown ) as Profile;
+    const user_profile = (this.storage_service.get("Profile")!["profile"] as unknown ) as Profile;
     let user_name:string|undefined,telephone:number|undefined;
     if(user_profile.user_name===undefined){
       user_name = prompt("Ingrese su Nombre de Usuario") as string
@@ -33,8 +33,8 @@ export class OportunidadesComponent implements OnInit {
 
     if(user_name!==undefined || telephone!==undefined){
       
-      
-      this.storage_service.store("user_profile",user_profile)
+      this.firebase_service.update("users",user_profile.email,user_profile)
+      this.storage_service.store("Profile",user_profile)
     }
     
   }

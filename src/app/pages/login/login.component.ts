@@ -34,6 +34,7 @@ export class LoginComponent {
       this.ToasterTools.setMessage("");
       this.ToasterTools.showToast();
       this.router.navigate(["/Oportunidades"]);
+
     }catch(error){
       this.ToasterTools.setKind(ToastKind.error);
       this.ToasterTools.setTitle("Error");

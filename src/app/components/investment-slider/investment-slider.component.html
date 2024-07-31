@@ -1,14 +1,14 @@
 <div class="w-full flex flex-col items-center justify-center relative">
-    <div class="relative container-gray w-5/6 rounded-3xl flex justify-between py-5 px-4 text-lg">
+    <div (click)="setOpen()" class="relative container-gray w-5/6 rounded-3xl flex justify-between py-5 px-4 text-lg">
         <h2>Propiedad</h2>
         <div class="flex space-x-2">
             <p>$300,000</p>
             @if(open){
                 <div class="rotate-180 w-full">
-                    <img (click)="setOpen()" src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png" width="30" height="30" alt="" title="" class="img-small">
+                    <img  src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png" width="30" height="30" alt="" title="" class="img-small">
                 </div>
             }@else {
-                <img (click)="setOpen()" src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png" width="30" height="30" alt="" title="" class="img-small">
+                <img  src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png" width="30" height="30" alt="" title="" class="img-small">
             }
         </div>
     </div>

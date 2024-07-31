@@ -15,7 +15,7 @@ import { FirebaseService } from '../services/firebase.service';
 export class AppComponent {
   title = 'genuine';
   showMenuBar:boolean=false;
-
+  declare docusign:any
   constructor(private router:Router,private firebase_service:FirebaseService){
     this.router.events.subscribe((event) => {
       this.showMenuBar = this.router.url !== '/IniciarSession';
